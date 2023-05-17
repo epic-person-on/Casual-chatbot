@@ -6,7 +6,7 @@
         body {
             background-color: pink;
         }
-        
+
         .container {
             margin: 100px auto;
             padding: 20px;
@@ -14,7 +14,7 @@
             background-color: lime;
             width: 500px;
         }
-        
+
         .popup {
             display: none;
             position: fixed;
@@ -27,12 +27,12 @@
             border-radius: 10px;
             text-align: center;
         }
-        
+
         .popup p {
             font-size: 24px;
             margin-bottom: 10px;
         }
-        
+
         .popup button {
             background-color: red;
             color: white;
@@ -48,48 +48,62 @@
     <div class="container">
         <h1>Infuriating Website</h1>
         <p>This is the most annoying website you will ever come across.</p>
-        <p>Try closing this tab. I dare you.</p>
+        <p>Try moving your mouse towards the top bar. I dare you.</p>
     </div>
-    
+
     <div class="popup">
-        <p>Are you sure you want to leave?</p>
-        <button onclick="showAngryPopup()">No</button>
-        <button onclick="showAngrierPopup()">Yes</button>
+        <p>Hey, where do you think you're going?</p>
+        <button onclick="showAngryPopup()">Stay here</button>
+        <button onclick="showAngrierPopup()">I'm leaving</button>
     </div>
-    
+
     <script>
-        window.onbeforeunload = function () {
-            return "";
-        };
-        
-        function showAngryPopup() {
+        var popupVisible = false;
+        var mouseX = 0;
+        var mouseY = 0;
+
+        window.addEventListener("mousemove", function (event) {
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+        });
+
+        setInterval(function () {
+            if (!popupVisible && mouseY < 20) {
+                showPopup();
+            }
+        }, 100);
+
+        function showPopup() {
             var popup = document.querySelector(".popup");
-            var buttons = document.querySelectorAll(".popup button");
             popup.style.display = "block";
-            popup.innerHTML = "<p>I said, are you sure you want to leave?</p><button onclick='showAngrierPopup()'>No</button><button onclick='showAngriestPopup()'>Yes</button>";
-            buttons.forEach(function (button) {
-                button.style.backgroundColor = "red";
-            });
+            popupVisible = true;
         }
-        
-        function showAngrierPopup() {
+
+        function hidePopup() {
             var popup = document.querySelector(".popup");
-            var buttons = document.querySelectorAll(".popup button");
+            popup.style.display = "none";
+            popupVisible = false;
+        }
+
+        function showAngryPopup() {
+            hidePopup();
+            var popup = document.querySelector(".popup");
+            popup.style.display = "block";
+            popup.innerHTML = "<p>I said, where do you think you're going?</p><button onclick='showAngrierPopup()'>Stay here</button><button onclick='showAngrierPopup()'>I'm leaving!</button>";
+        }
+
+        function showAngrierPopup() {
+            hidePopup();
+            var popup = document.querySelector(".popup");
             popup.style.display = "block";
             popup.innerHTML = "<p>You really don't know when to give up, do you?</p><button onclick='showAngriestPopup()'>I'm sorry</button><button onclick='showAngrierPopup()'>Leave me alone!</button>";
-            buttons.forEach(function (button) {
-                button.style.backgroundColor = "purple";
-            });
         }
-        
+
         function showAngriestPopup() {
+            hidePopup();
             var popup = document.querySelector(".popup");
-            var buttons = document.querySelectorAll(".popup button");
             popup.style.display = "block";
             popup.innerHTML = "<p>You've really done it now.</p><button onclick='showAngrierPopup()'>Please forgive me</button><button onclick='window.location.href=\"https://www.youtube.com/watch?v=dQw4w9WgXcQ\"'>I'll never do it again</button>";
-            buttons.forEach(function (button) {
-                button.style.backgroundColor = "black";
-            });
         }
     </script>
 </body>
