@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Infuriating Website</title>
+    <style>
+        body {
+            background-color: pink;
+        }
+        
+        .container {
+            margin: 100px auto;
+            padding: 20px;
+            border: 10px solid purple;
+            background-color: lime;
+            width: 500px;
+        }
+        
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: yellow;
+            padding: 20px;
+            border: 5px solid red;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .popup p {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .popup button {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Infuriating Website</h1>
+        <p>This is the most annoying website you will ever come across.</p>
+        <p>Try closing this tab. I dare you.</p>
+    </div>
+    
+    <div class="popup">
+        <p>Are you sure you want to leave?</p>
+        <button onclick="showAngryPopup()">No</button>
+        <button onclick="showAngrierPopup()">Yes</button>
+    </div>
+    
+    <script>
+        window.onbeforeunload = function () {
+            return "";
+        };
+        
+        function showAngryPopup() {
+            var popup = document.querySelector(".popup");
+            var buttons = document.querySelectorAll(".popup button");
+            popup.style.display = "block";
+            popup.innerHTML = "<p>I said, are you sure you want to leave?</p><button onclick='showAngrierPopup()'>No</button><button onclick='showAngriestPopup()'>Yes</button>";
+            buttons.forEach(function (button) {
+                button.style.backgroundColor = "red";
+            });
+        }
+        
+        function showAngrierPopup() {
+            var popup = document.querySelector(".popup");
+            var buttons = document.querySelectorAll(".popup button");
+            popup.style.display = "block";
+            popup.innerHTML = "<p>You really don't know when to give up, do you?</p><button onclick='showAngriestPopup()'>I'm sorry</button><button onclick='showAngrierPopup()'>Leave me alone!</button>";
+            buttons.forEach(function (button) {
+                button.style.backgroundColor = "purple";
+            });
+        }
+        
+        function showAngriestPopup() {
+            var popup = document.querySelector(".popup");
+            var buttons = document.querySelectorAll(".popup button");
+            popup.style.display = "block";
+            popup.innerHTML = "<p>You've really done it now.</p><button onclick='showAngrierPopup()'>Please forgive me</button><button onclick='window.location.href=\"https://www.youtube.com/watch?v=dQw4w9WgXcQ\"'>I'll never do it again</button>";
+            buttons.forEach(function (button) {
+                button.style.backgroundColor = "black";
+            });
+        }
+    </script>
+</body>
+</html>
