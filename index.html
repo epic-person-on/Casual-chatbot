@@ -53,8 +53,8 @@
 
     <div class="popup">
         <p>Hey, where do you think you're going?</p>
-        <button onclick="showAngryPopup()">Stay here</button>
-        <button onclick="showAngrierPopup()">I'm leaving</button>
+        <button onclick="redirectToHome()">Stay here</button>
+        <button onclick="showAngryPopup()">I'm leaving</button>
     </div>
 
     <script>
@@ -68,7 +68,7 @@
         });
 
         setInterval(function () {
-            if (!popupVisible && mouseY < 20) {
+            if (!popupVisible && mouseY < 20 && mouseY >= 0) {
                 showPopup();
             }
         }, 100);
@@ -85,25 +85,33 @@
             popupVisible = false;
         }
 
+        function redirectToHome() {
+            window.location.href = "index.html";
+        }
+
         function showAngryPopup() {
             hidePopup();
             var popup = document.querySelector(".popup");
             popup.style.display = "block";
-            popup.innerHTML = "<p>I said, where do you think you're going?</p><button onclick='showAngrierPopup()'>Stay here</button><button onclick='showAngrierPopup()'>I'm leaving!</button>";
+            popup.innerHTML = "<p>I said, where do you think you're going?</p><button onclick='showAngrierPopup()'>Stay here</button><button onclick='showAngriestPopup()'>I'm leaving!</button>";
         }
 
         function showAngrierPopup() {
             hidePopup();
             var popup = document.querySelector(".popup");
             popup.style.display = "block";
-            popup.innerHTML = "<p>You really don't know when to give up, do you?</p><button onclick='showAngriestPopup()'>I'm sorry</button><button onclick='showAngrierPopup()'>Leave me alone!</button>";
+            popup.innerHTML = "<p>You really don't know when to give up, do you?</p><button onclick='showAngriestPopup()'>I'm sorry</button><button onclick='showAngriestPopup()'>Leave me alone!</button>";
         }
 
         function showAngriestPopup() {
             hidePopup();
             var popup = document.querySelector(".popup");
             popup.style.display = "block";
-            popup.innerHTML = "<p>You've really done it now.</p><button onclick='showAngrierPopup()'>Please forgive me</button><button onclick='window.location.href=\"https://www.youtube.com/watch?v=dQw4w9WgXcQ\"'>I'll never do it again</button>";
+            popup.innerHTML = "<p>You've really done it now.</p><button onclick='showRickroll()'>Please forgive me</button><button onclick='showAngriestPopup()'>I'll never do it again</button>";
+        }
+
+        function showRickroll() {
+            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
         }
     </script>
 </body>
